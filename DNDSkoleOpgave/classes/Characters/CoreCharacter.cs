@@ -8,6 +8,8 @@ namespace DNDSkoleOpgave.Characters;
 
 public abstract class CoreCharacter : IDamageable
 {
+    private readonly List<CoreItem> _inventory = new();
+
     protected CoreCharacter(
         string id,
         string characterName,
@@ -21,6 +23,7 @@ public abstract class CoreCharacter : IDamageable
         ArgumentOutOfRangeException.ThrowIfLessThan(level, 1);
 
         ID = id;
+        Inventory = _inventory.AsReadOnly();
         CharacterName = characterName;
         Level = level;
         CharacterClass = characterClass ?? throw new ArgumentNullException(nameof(characterClass));
@@ -51,10 +54,11 @@ public abstract class CoreCharacter : IDamageable
     public int MaximumHealth { get; private set; }
     public int DeathRolls { get; private set; }
     public int ActionPoints { get; set; } = 1;
+    public int AttackBonus { get; set; }
     public int[] StatArray { get; }
     public CharacterClass CharacterClass { get; }
     public CharacterRace CharacterRace { get; }
-    public List<CoreItem> Inventory { get; } = [];
+    public IReadOnlyList<CoreItem> Inventory { get; }
     public EquipmentSlots Equipment { get; } = new();
     public List<CombatAction> Actions { get; } = [];
     public List<ActiveEffect> ActiveEffects { get; } = [];
@@ -76,13 +80,21 @@ public abstract class CoreCharacter : IDamageable
 
     public int GetStat(CharacterStat stat) => StatArray[(int)stat];
 
+    public void AddItem(CoreItem item)
+    {
+        ArgumentNullException.ThrowIfNull(item);
+        _inventory.Add(item);
+    }
+
+    public bool RemoveItem(CoreItem item) => _inventory.Remove(item);
+
     public int GetStatModifier(CharacterStat stat) =>
         (int)Math.Floor((GetStat(stat) - 10) / 2.0);
 
     public void EquipItem(EquipmentItem item)
     {
         ArgumentNullException.ThrowIfNull(item);
-        if (!Inventory.Remove(item))
+        if (!_inventory.Remove(item))
         {
             throw new InvalidOperationException($"{item.Name} is not in {CharacterName}'s inventory.");
         }
@@ -90,7 +102,7 @@ public abstract class CoreCharacter : IDamageable
         EquipmentItem? replacedItem = Equipment.Equip(item);
         if (replacedItem is not null)
         {
-            Inventory.Add(replacedItem);
+            _inventory.Add(replacedItem);
         }
     }
 
@@ -98,7 +110,7 @@ public abstract class CoreCharacter : IDamageable
     {
         EquipmentItem item = Equipment.Unequip(slot)
             ?? throw new InvalidOperationException($"Nothing is equipped in the {slot} slot.");
-        Inventory.Add(item);
+        _inventory.Add(item);
         return item;
     }
 
@@ -115,7 +127,7 @@ public abstract class CoreCharacter : IDamageable
     public void Heal(int amount)
     {
         ArgumentOutOfRangeException.ThrowIfNegative(amount);
-        CurrentHealth = Math.Min(MaximumHealth, CurrentHealth + amount);
+        CurrentHealth += Math.Min(MaximumHealth - CurrentHealth, amount);
     }
 
     public void ResetHealth()
@@ -135,7 +147,7 @@ public abstract class CoreCharacter : IDamageable
 
         ApplyLevelRewardsForCurrentLevel();
         MaximumHealth = CalculateHealth();
-        CurrentHealth = MaximumHealth;
+        CurrentHealth = Math.Min(CurrentHealth, MaximumHealth);
     }
 
     public void ApplyLevelRewardsForCurrentLevel()
@@ -149,7 +161,7 @@ public abstract class CoreCharacter : IDamageable
         foreach (string itemId in unlock.ItemIds)
         {
             CoreItem item = ItemCreator.Create(itemId);
-            Inventory.Add(item);
+            _inventory.Add(item);
             if (item is EquipmentItem equipment && Equipment[equipment.EquipmentSlot] is null)
             {
                 EquipItem(equipment);
@@ -189,6 +201,8 @@ public abstract class CoreCharacter : IDamageable
     {
         foreach (ActiveEffect effect in ActiveEffects)
         {
+            if (IsDefeated)
+                break;
             effect.ProcessTurn(this);
         }
 

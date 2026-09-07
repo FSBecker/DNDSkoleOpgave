@@ -1,55 +1,36 @@
 using DNDSkoleOpgave.Persistence;
+using DNDSkoleOpgave.UI;
+using Spectre.Console;
 
 namespace DNDSkoleOpgave.Characters;
 
 public sealed class ConsoleCharacterMenu
 {
-    private readonly TextReader _input;
-    private readonly TextWriter _output;
-
-    public ConsoleCharacterMenu(TextReader input, TextWriter output)
-    {
-        _input = input ?? throw new ArgumentNullException(nameof(input));
-        _output = output ?? throw new ArgumentNullException(nameof(output));
-    }
-
     public PlayerCharacter CreateOrLoad(CharacterJsonRepository repository)
     {
-        ArgumentNullException.ThrowIfNull(repository);
         IReadOnlyList<string> savedIds = repository.GetSavedCharacterIds();
         if (savedIds.Count == 0)
-        {
-            return new ConsoleCharacterCreator(_input, _output).Create();
-        }
+            return CreateCharacter();
 
-        _output.Write("Create a new character or load one? [C/L]: ");
-        string? choice = _input.ReadLine();
-        if (!string.Equals(choice?.Trim(), "L", StringComparison.OrdinalIgnoreCase))
-        {
-            return new ConsoleCharacterCreator(_input, _output).Create();
-        }
+        string choice = GameMenu.Choose("Karakter", "Opret ny karakter", "Indlæs karakter");
+        if (choice == "Opret ny karakter")
+            return CreateCharacter();
+        return LoadCharacter(repository, savedIds);
+    }
 
-        List<PlayerCharacter> characters = savedIds.Select(repository.Load).ToList();
-        while (true)
-        {
-            _output.WriteLine("Choose a saved character:");
-            for (int index = 0; index < characters.Count; index++)
-            {
-                PlayerCharacter character = characters[index];
-                _output.WriteLine($"  {index + 1}. {character.CharacterName} - Level {character.Level} {character.CharacterRace.RaceName} {character.CharacterClass.ClassName}");
-            }
+    private static PlayerCharacter CreateCharacter() => new ConsoleCharacterCreator().Create();
 
-            _output.Write("> ");
-            if (int.TryParse(_input.ReadLine(), out int selection)
-                && selection >= 1
-                && selection <= characters.Count)
-            {
-                PlayerCharacter loaded = characters[selection - 1];
-                _output.WriteLine($"Loaded {loaded.CharacterName}.");
-                return loaded;
-            }
+    private static PlayerCharacter LoadCharacter(CharacterJsonRepository repository, IReadOnlyList<string> savedIds)
+    {
+        List<PlayerCharacter> characters = new();
+        foreach (string id in savedIds)
+            characters.Add(repository.Load(id));
+        return GameMenu.Choose("Vælg gemt karakter", characters, DescribeCharacter);
+    }
 
-            _output.WriteLine("Please enter one of the displayed numbers.");
-        }
+    private static string DescribeCharacter(PlayerCharacter player)
+    {
+        string status = player.IsDefeated ? "BESEJRET" : $"næste wave {player.NextWave}";
+        return Markup.Escape($"{player.CharacterName} · Level {player.Level} · {player.CurrentHealth}/{player.MaximumHealth} HP · {status}");
     }
 }

@@ -17,7 +17,9 @@ public sealed class LootEntry
     public string ItemId { get; }
     public int ChancePercent { get; }
 
-    public CoreItem? Roll() => Random.Shared.Next(1, 101) <= ChancePercent
+    public CoreItem? Roll() => Roll(new Utilities.RandomDiceRoller());
+
+    public CoreItem? Roll(Utilities.IDiceRoller dice) => dice.Roll(100) <= ChancePercent
         ? _createItem()
         : null;
 }

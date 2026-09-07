@@ -64,15 +64,12 @@ public sealed class CharacterJsonRepository
 
         foreach (string itemId in data.InventoryItemIds)
         {
-            character.Inventory.Add(ItemCreator.Create(itemId));
+            character.AddItem(ItemCreator.Create(itemId));
         }
 
         foreach (EquipmentSaveData savedEquipment in data.Equipment)
         {
-            EquipmentItem item = character.Inventory
-                .OfType<EquipmentItem>()
-                .FirstOrDefault(candidate => candidate.ID.Equals(savedEquipment.ItemId, StringComparison.OrdinalIgnoreCase))
-                ?? ItemCreator.Create(savedEquipment.ItemId) as EquipmentItem
+            EquipmentItem item = ItemCreator.Create(savedEquipment.ItemId) as EquipmentItem
                 ?? throw new JsonSerializationException($"Equipped item '{savedEquipment.ItemId}' is not equipment.");
 
             if (item.EquipmentSlot != savedEquipment.Slot)
@@ -80,11 +77,7 @@ public sealed class CharacterJsonRepository
                 throw new JsonSerializationException($"Item '{item.ID}' cannot use the saved equipment slot.");
             }
 
-            if (!character.Inventory.Contains(item))
-            {
-                character.Inventory.Add(item);
-            }
-
+            character.AddItem(item);
             character.EquipItem(item);
         }
 
@@ -98,6 +91,8 @@ public sealed class CharacterJsonRepository
         }
 
         character.RestoreState(data.CurrentHealth, data.DeathRolls, data.ActionPoints);
+        character.NextWave = Math.Max(1, data.NextWave);
+        character.ActionPoints = Game.Difficulty.PlayerActionPoints;
         return character;
     }
 

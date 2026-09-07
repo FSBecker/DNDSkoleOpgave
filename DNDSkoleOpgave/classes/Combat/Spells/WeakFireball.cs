@@ -6,7 +6,7 @@ public sealed class WeakFireball : SpellAction
     {
     }
 
-    public int SavingThrowDifficulty { get; } = 10;
-    public int BurningDamageDiceSides { get; } = 4;
-    public int BurningDurationDiceSides { get; } = 4;
+    public override int? SavingThrowDifficulty => 10;
+    public override int? BurningDamageDiceSides => 2;
+    public override int? BurningDurationDiceSides => 2;
 }

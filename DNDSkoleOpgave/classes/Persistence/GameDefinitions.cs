@@ -8,20 +8,20 @@ public sealed class GameDefinitions
     public int Version { get; set; } = 1;
 
     [JsonProperty("classes", Required = Required.Always)]
-    public List<ClassDefinition> Classes { get; set; } = [];
+    public List<ClassDefinition> AllClasses { get; set; } = [];
 
     [JsonProperty("races", Required = Required.Always)]
-    public List<RaceDefinition> Races { get; set; } = [];
+    public List<RaceDefinition> AllRaces { get; set; } = [];
 
     [JsonProperty("items", Required = Required.Always)]
-    public List<ItemDefinition> Items { get; set; } = [];
+    public List<ItemDefinition> AllItems { get; set; } = [];
 
     [JsonProperty("actions", Required = Required.Always)]
-    public List<ActionDefinition> Actions { get; set; } = [];
+    public List<ActionDefinition> AllActions { get; set; } = [];
 
     [JsonProperty("effects")]
-    public List<EffectDefinition> Effects { get; set; } = [];
+    public List<EffectDefinition> AllEffects { get; set; } = [];
 
     [JsonProperty("enemies")]
-    public List<EnemyDefinition> Enemies { get; set; } = [];
+    public List<EnemyDefinition> AllEnemies { get; set; } = [];
 }

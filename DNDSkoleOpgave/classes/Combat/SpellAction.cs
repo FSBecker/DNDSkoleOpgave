@@ -15,4 +15,7 @@ public abstract class SpellAction : CombatAction
     }
 
     public bool TargetsAlly { get; }
+    public virtual int? SavingThrowDifficulty => null;
+    public virtual int? BurningDamageDiceSides => null;
+    public virtual int? BurningDurationDiceSides => null;
 }

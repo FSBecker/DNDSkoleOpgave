@@ -14,7 +14,7 @@ public static class ItemCreator
         {
             IEnumerable<Combat.ActionEffect> effects = definition.EffectIds.Select(effectId =>
             {
-                Persistence.EffectDefinition effect = definitions?.Effects.First(value =>
+                Persistence.EffectDefinition effect = definitions?.AllEffects.First(value =>
                     value.Id.Equals(effectId, StringComparison.OrdinalIgnoreCase))
                     ?? throw new ArgumentException("Game definitions are required to create a consumable.");
                 return Combat.ActionEffectCreator.Create(

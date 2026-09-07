@@ -2,7 +2,9 @@ namespace DNDSkoleOpgave.Utilities;
 
 public static class DiceRoller
 {
-    public static int Roll(int amount, int sides)
+    public static int Roll(int amount, int sides) => Roll(amount, sides, new RandomDiceRoller());
+
+    public static int Roll(int amount, int sides, IDiceRoller dice)
     {
         ArgumentOutOfRangeException.ThrowIfLessThan(amount, 1);
         ArgumentOutOfRangeException.ThrowIfLessThan(sides, 2);
@@ -10,7 +12,7 @@ public static class DiceRoller
         int total = 0;
         for (int roll = 0; roll < amount; roll++)
         {
-            total += Random.Shared.Next(1, sides + 1);
+            total += dice.Roll(sides);
         }
 
         return total;

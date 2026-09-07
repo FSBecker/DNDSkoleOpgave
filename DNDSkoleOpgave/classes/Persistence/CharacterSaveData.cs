@@ -36,6 +36,9 @@ public sealed class CharacterSaveData
     [JsonProperty("actionPoints", Required = Required.Always)]
     public int ActionPoints { get; set; }
 
+    [JsonProperty("nextWave")]
+    public int NextWave { get; set; } = 1;
+
     [JsonProperty("inventoryItemIds", Required = Required.Always)]
     public List<string> InventoryItemIds { get; set; } = [];
 
@@ -67,8 +70,9 @@ public sealed class CharacterSaveData
             CurrentHealth = character.CurrentHealth,
             DeathRolls = character.DeathRolls,
             ActionPoints = character.ActionPoints,
+            NextWave = character.NextWave,
             InventoryItemIds = character.Inventory.Select(item => item.ID).ToList(),
-            Equipment = character.Equipment.All
+            Equipment = character.Equipment.AllEquipment
                 .Select(entry => new EquipmentSaveData { Slot = entry.Key, ItemId = entry.Value.ID })
                 .ToList(),
             ActionIds = character.Actions.Select(action => action.ID).ToList()

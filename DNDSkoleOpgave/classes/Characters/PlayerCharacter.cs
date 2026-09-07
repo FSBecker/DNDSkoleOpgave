@@ -5,6 +5,8 @@ namespace DNDSkoleOpgave.Characters;
 
 public sealed class PlayerCharacter : CoreCharacter
 {
+    public int NextWave { get; set; } = 1;
+
     public PlayerCharacter(
         string id,
         string characterName,
@@ -13,6 +15,7 @@ public sealed class PlayerCharacter : CoreCharacter
         int[]? baseStats = null)
         : base(id, characterName, 1, characterClass, characterRace, baseStats)
     {
+        ActionPoints = Game.Difficulty.PlayerActionPoints;
     }
 
     public PlayerCharacter(
@@ -24,5 +27,6 @@ public sealed class PlayerCharacter : CoreCharacter
         int[]? baseStats = null)
         : base(id, characterName, level, characterClass, characterRace, baseStats)
     {
+        ActionPoints = Game.Difficulty.PlayerActionPoints;
     }
 }

@@ -9,24 +9,69 @@ namespace DNDSkoleOpgave.Persistence;
 
 public static class GameDefinitionsCreator
 {
-    public static GameDefinitions Create() => new()
+    public static GameDefinitions Create()
     {
-        Classes = CharacterClassCreator.AvailableNames
+        GameDefinitions definitions = CreatePlayerDefinitions();
+        AddPotionEffect(definitions);
+        AddEnemyDefinitions(definitions);
+        return definitions;
+    }
+
+    private static GameDefinitions CreatePlayerDefinitions() => new()
+    {
+        AllClasses = CharacterClassCreator.AllClassNames
             .Select(CharacterClassCreator.Create)
             .Select(CreateClassDefinition)
             .ToList(),
-        Races = CharacterRaceCreator.AvailableNames
+        AllRaces = CharacterRaceCreator.AllRaceNames
             .Select(CharacterRaceCreator.Create)
             .Select(CreateRaceDefinition)
             .ToList(),
-        Items = ItemCatalog.AllIds
+        AllItems = ItemCatalog.AllItemIds
             .Select(ItemCreator.Create)
             .Select(CreateItemDefinition)
             .ToList(),
-        Actions = ActionCatalog.All.Values
+        AllActions = ActionCatalog.AllActions.Values
             .Select(CreateActionDefinition)
             .ToList()
     };
+
+    private static void AddPotionEffect(GameDefinitions definitions)
+    {
+        definitions.AllEffects.Add(new EffectDefinition
+        {
+            Id = "small-potion-healing", Name = "Potion healing",
+            Type = Enums.ActionEffectType.Healing, Amount = 6, Target = Enums.EffectTarget.Self
+        });
+    }
+
+    private static void AddEnemyDefinitions(GameDefinitions definitions)
+    {
+        definitions.AllClasses.Add(new ClassDefinition
+        {
+            Name = "Monster", Description = "Wave enemy", EnemyOnly = true,
+            BaseHealth = 8, HealthPerLevel = 3,
+            StartingItemIds = ["short-sword"],
+            LevelLockedActionIds = { [1] = ["short-sword-strike"] }
+        });
+
+        AddEnemy(definitions, "Goblin", new() { [Enums.CharacterStat.Dexterity] = 2 });
+        AddEnemy(definitions, "Orc", new() { [Enums.CharacterStat.Constitution] = 4 });
+        AddEnemy(definitions, "Skeleton", new());
+    }
+
+    private static void AddEnemy(GameDefinitions definitions, string name,
+        Dictionary<Enums.CharacterStat, int> statBuffs)
+    {
+        definitions.AllRaces.Add(new RaceDefinition
+        {
+            Name = name, Description = "Enemy race", EnemyOnly = true, StatBuffs = statBuffs
+        });
+        definitions.AllEnemies.Add(new EnemyDefinition
+        {
+            Id = name.ToLowerInvariant(), Name = name, RaceName = name, ClassName = "Monster"
+        });
+    }
 
     private static ClassDefinition CreateClassDefinition(CharacterClass characterClass) => new()
     {
@@ -78,7 +123,7 @@ public static class GameDefinitionsCreator
 
     private static ActionDefinition CreateActionDefinition(CombatAction action)
     {
-        WeakFireball? fireball = action as WeakFireball;
+        SpellAction? fireball = action as SpellAction;
         return new ActionDefinition
         {
             Id = action.ID,

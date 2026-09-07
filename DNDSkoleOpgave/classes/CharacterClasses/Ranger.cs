@@ -4,7 +4,7 @@ namespace DNDSkoleOpgave.CharacterClasses;
 
 public sealed class Ranger : CharacterClass
 {
-    public Ranger() : base("Ranger", "A quick and resourceful wilderness fighter.", 8, 5)
+    public Ranger() : base("Ranger", "A quick and resourceful wilderness fighter.", 20, 3)
     {
         StatBuffs[CharacterStat.Dexterity] = 2;
         StartingItemIds.AddRange(["light-leather-armor", "bow", "short-sword"]);

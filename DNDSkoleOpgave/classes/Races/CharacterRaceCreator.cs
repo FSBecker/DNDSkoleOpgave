@@ -2,18 +2,31 @@ namespace DNDSkoleOpgave.Races;
 
 public static class CharacterRaceCreator
 {
-    public static IReadOnlyList<string> AvailableNames { get; } = ["Dwarf", "Elf", "Human"];
+    private static readonly Dictionary<string, Func<CharacterRace>> RaceFactories = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["Dwarf"] = () => new Dwarf(),
+        ["Elf"] = () => new Elf(),
+        ["Human"] = () => new Human()
+    };
+
+    public static IReadOnlyList<string> AllRaceNames => RaceFactories.Keys.ToList();
+
+    public static void Load(Persistence.GameDefinitions definitions)
+    {
+        RaceFactories.Clear();
+        foreach (Persistence.RaceDefinition race in definitions.AllRaces)
+        {
+            if (!race.EnemyOnly)
+                RaceFactories[race.Name] = () => Create(race);
+        }
+    }
 
     public static CharacterRace Create(string name)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
-        return name.Trim().ToLowerInvariant() switch
-        {
-            "dwarf" => new Dwarf(),
-            "elf" => new Elf(),
-            "human" => new Human(),
-            _ => throw new ArgumentException($"Unknown character race '{name}'.", nameof(name))
-        };
+        if (!RaceFactories.TryGetValue(name.Trim(), out Func<CharacterRace>? createRace))
+            throw new ArgumentException($"Unknown character race '{name}'.", nameof(name));
+        return createRace();
     }
 
     public static CharacterRace Create(Persistence.RaceDefinition definition) => new DefinedCharacterRace(definition);

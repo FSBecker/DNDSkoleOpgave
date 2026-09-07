@@ -23,4 +23,16 @@ public sealed class EnemyCharacter : CoreCharacter
         .Select(entry => entry.Roll())
         .OfType<CoreItem>()
         .ToList();
+
+    public IReadOnlyList<CoreItem> RollLoot(Utilities.IDiceRoller dice)
+    {
+        List<CoreItem> loot = new();
+        foreach (LootEntry entry in LootTable)
+        {
+            CoreItem? item = entry.Roll(dice);
+            if (item is not null)
+                loot.Add(item);
+        }
+        return loot;
+    }
 }

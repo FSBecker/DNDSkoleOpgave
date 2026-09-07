@@ -13,7 +13,7 @@ public sealed class DefinedSpellAction : SpellAction
         BurningDurationDiceSides = definition.BurningDurationDiceSides;
     }
 
-    public int? SavingThrowDifficulty { get; }
-    public int? BurningDamageDiceSides { get; }
-    public int? BurningDurationDiceSides { get; }
+    public override int? SavingThrowDifficulty { get; }
+    public override int? BurningDamageDiceSides { get; }
+    public override int? BurningDurationDiceSides { get; }
 }

@@ -40,26 +40,26 @@ public sealed class AdminCreator
                 switch (ReadInt("> ", 0, 8))
                 {
                     case 1:
-                        AddUnique(definitions.Classes, CreateClass(definitions), value => value.Name, "class");
+                        AddUnique(definitions.AllClasses, CreateClass(definitions), value => value.Name, "class");
                         break;
                     case 2:
-                        AddUnique(definitions.Races, CreateRace(), value => value.Name, "race");
+                        AddUnique(definitions.AllRaces, CreateRace(), value => value.Name, "race");
                         break;
                     case 3:
                     {
                         EnemyDefinition enemy = CreateEnemy(definitions);
                         _ = EnemyCreator.Create(enemy, definitions);
-                        AddUnique(definitions.Enemies, enemy, value => value.Id, "enemy");
+                        AddUnique(definitions.AllEnemies, enemy, value => value.Id, "enemy");
                         break;
                     }
                     case 4:
-                        AddUnique(definitions.Items, CreateItem(definitions), value => value.Id, "item");
+                        AddUnique(definitions.AllItems, CreateItem(definitions), value => value.Id, "item");
                         break;
                     case 5:
-                        AddUnique(definitions.Actions, CreateAction(definitions), value => value.Id, "action");
+                        AddUnique(definitions.AllActions, CreateAction(definitions), value => value.Id, "action");
                         break;
                     case 6:
-                        AddUnique(definitions.Effects, CreateEffect(definitions), value => value.Id, "effect");
+                        AddUnique(definitions.AllEffects, CreateEffect(definitions), value => value.Id, "effect");
                         break;
                     case 7:
                         ListDefinitions(definitions);
@@ -94,7 +94,7 @@ public sealed class AdminCreator
             HealthPerLevel = ReadInt("Health gained per level: ", 0, 1000),
             StartingItemIds = SelectMany(
                 "Select starting items",
-                definitions.Items,
+                definitions.AllItems,
                 item => $"{item.Name} ({item.Id})",
                 item => item.Id)
         };
@@ -116,12 +116,12 @@ public sealed class AdminCreator
                 HealthBonus = ReadInt("Bonus maximum health: ", 0, 1000),
                 ActionIds = SelectMany(
                 "Select actions unlocked at this level",
-                definitions.Actions,
+                definitions.AllActions,
                 action => $"{action.Name} ({action.Id})",
                     action => action.Id),
                 ItemIds = SelectMany(
                     "Select items granted at this level",
-                    definitions.Items,
+                    definitions.AllItems,
                     item => $"{item.Name} ({item.Id})",
                     item => item.Id)
             };
@@ -164,8 +164,8 @@ public sealed class AdminCreator
 
     private EnemyDefinition CreateEnemy(GameDefinitions definitions)
     {
-        List<ClassDefinition> enemyClasses = definitions.Classes.Where(value => value.EnemyOnly).ToList();
-        List<RaceDefinition> enemyRaces = definitions.Races.Where(value => value.EnemyOnly).ToList();
+        List<ClassDefinition> enemyClasses = definitions.AllClasses.Where(value => value.EnemyOnly).ToList();
+        List<RaceDefinition> enemyRaces = definitions.AllRaces.Where(value => value.EnemyOnly).ToList();
         if (enemyClasses.Count == 0 || enemyRaces.Count == 0)
         {
             throw new InvalidOperationException(
@@ -187,7 +187,7 @@ public sealed class AdminCreator
 
         EnemyDefinition enemy = new()
         {
-            Id = GenerateUniqueId(definitions.Enemies.Select(enemy => enemy.Id)),
+            Id = GenerateUniqueId(definitions.AllEnemies.Select(enemy => enemy.Id)),
             Name = ReadRequired("Enemy name: "),
             ClassName = selectedClass.Name,
             RaceName = selectedRace.Name,
@@ -195,10 +195,10 @@ public sealed class AdminCreator
             BaseStats = stats
         };
 
-        while (definitions.Items.Count > enemy.LootTable.Count
+        while (definitions.AllItems.Count > enemy.LootTable.Count
                && ReadYesNo("Add an item to this enemy's loot table? [Y/N]: "))
         {
-            List<ItemDefinition> availableItems = definitions.Items
+            List<ItemDefinition> availableItems = definitions.AllItems
                 .Where(item => enemy.LootTable.All(loot => !loot.ItemId.Equals(
                     item.Id, StringComparison.OrdinalIgnoreCase)))
                 .ToList();
@@ -220,7 +220,7 @@ public sealed class AdminCreator
         ItemType itemType = ReadEnum<ItemType>("Item type");
         ItemDefinition definition = new()
         {
-            Id = GenerateUniqueId(definitions.Items.Select(item => item.Id)),
+            Id = GenerateUniqueId(definitions.AllItems.Select(item => item.Id)),
             Name = ReadRequired("Item name: "),
             ItemType = itemType
         };
@@ -236,7 +236,7 @@ public sealed class AdminCreator
             definition.WeaponType = ReadEnum<WeaponType>("Weapon type");
             definition.ActionIds = SelectMany(
                 "Select actions granted by this weapon",
-                definitions.Actions,
+                definitions.AllActions,
                 action => $"{action.Name} ({action.Id})",
                 action => action.Id);
         }
@@ -245,7 +245,7 @@ public sealed class AdminCreator
         {
             definition.EffectIds = SelectMany(
                 "Select effects applied when this consumable is used",
-                definitions.Effects,
+                definitions.AllEffects,
                 effect => $"{effect.Name} ({effect.Type}, {effect.Target}, {effect.Timing})",
                 effect => effect.Id,
                 allowEmpty: false);
@@ -260,10 +260,10 @@ public sealed class AdminCreator
         string kind = kinds[ReadChoice("Action kind", kinds)];
         ActionDefinition definition = new()
         {
-            Id = GenerateUniqueId(definitions.Actions.Select(action => action.Id)),
+            Id = GenerateUniqueId(definitions.AllActions.Select(action => action.Id)),
             Name = ReadRequired("Action name: "),
             Kind = kind,
-            ActionCost = ReadInt("Action-point cost: ", 0, 1000),
+            ActionCost = ReadInt("Action-point cost: ", 1, 1000),
             DiceAmount = ReadInt("Number of dice: ", 1, 1000),
             DiceSides = ReadInt("Sides per die: ", 2, 1000),
             PrimaryStat = ReadEnum<CharacterStat>("Primary stat")
@@ -284,11 +284,11 @@ public sealed class AdminCreator
             }
         }
 
-        if (definitions.Effects.Count > 0)
+        if (definitions.AllEffects.Count > 0)
         {
             definition.EffectIds = SelectMany(
                 "Select effects for this action",
-                definitions.Effects,
+                definitions.AllEffects,
                 effect => $"{effect.Name} ({effect.Id})",
                 effect => effect.Id,
                 allowEmpty: true);
@@ -305,7 +305,7 @@ public sealed class AdminCreator
         EffectTiming timing = ReadEnum<EffectTiming>("Effect timing");
         return new EffectDefinition
         {
-            Id = GenerateUniqueId(definitions.Effects.Select(effect => effect.Id)),
+            Id = GenerateUniqueId(definitions.AllEffects.Select(effect => effect.Id)),
             Name = name,
             Type = type,
             Target = target,
@@ -347,18 +347,18 @@ public sealed class AdminCreator
 
     private void EditClass(GameDefinitions definitions)
     {
-        int index = SelectExisting("class", definitions.Classes, value => value.Name);
-        ClassDefinition oldValue = definitions.Classes[index];
+        int index = SelectExisting("class", definitions.AllClasses, value => value.Name);
+        ClassDefinition oldValue = definitions.AllClasses[index];
         ClassDefinition newValue = CreateClass(definitions);
-        EnsureUniqueExcept(definitions.Classes, newValue.Name, value => value.Name, index, "class");
-        if (!newValue.EnemyOnly && definitions.Enemies.Any(enemy =>
+        EnsureUniqueExcept(definitions.AllClasses, newValue.Name, value => value.Name, index, "class");
+        if (!newValue.EnemyOnly && definitions.AllEnemies.Any(enemy =>
                 enemy.ClassName.Equals(oldValue.Name, StringComparison.OrdinalIgnoreCase)))
         {
             throw new InvalidOperationException("This class is used by an enemy and must remain enemy-only.");
         }
-        definitions.Classes[index] = newValue;
+        definitions.AllClasses[index] = newValue;
 
-        foreach (EnemyDefinition enemy in definitions.Enemies.Where(enemy =>
+        foreach (EnemyDefinition enemy in definitions.AllEnemies.Where(enemy =>
                      enemy.ClassName.Equals(oldValue.Name, StringComparison.OrdinalIgnoreCase)))
         {
             enemy.ClassName = newValue.Name;
@@ -367,18 +367,18 @@ public sealed class AdminCreator
 
     private void EditRace(GameDefinitions definitions)
     {
-        int index = SelectExisting("race", definitions.Races, value => value.Name);
-        RaceDefinition oldValue = definitions.Races[index];
+        int index = SelectExisting("race", definitions.AllRaces, value => value.Name);
+        RaceDefinition oldValue = definitions.AllRaces[index];
         RaceDefinition newValue = CreateRace();
-        EnsureUniqueExcept(definitions.Races, newValue.Name, value => value.Name, index, "race");
-        if (!newValue.EnemyOnly && definitions.Enemies.Any(enemy =>
+        EnsureUniqueExcept(definitions.AllRaces, newValue.Name, value => value.Name, index, "race");
+        if (!newValue.EnemyOnly && definitions.AllEnemies.Any(enemy =>
                 enemy.RaceName.Equals(oldValue.Name, StringComparison.OrdinalIgnoreCase)))
         {
             throw new InvalidOperationException("This race is used by an enemy and must remain enemy-only.");
         }
-        definitions.Races[index] = newValue;
+        definitions.AllRaces[index] = newValue;
 
-        foreach (EnemyDefinition enemy in definitions.Enemies.Where(enemy =>
+        foreach (EnemyDefinition enemy in definitions.AllEnemies.Where(enemy =>
                      enemy.RaceName.Equals(oldValue.Name, StringComparison.OrdinalIgnoreCase)))
         {
             enemy.RaceName = newValue.Name;
@@ -387,38 +387,38 @@ public sealed class AdminCreator
 
     private void EditEnemy(GameDefinitions definitions)
     {
-        int index = SelectExisting("enemy", definitions.Enemies, value => value.Name);
-        string id = definitions.Enemies[index].Id;
+        int index = SelectExisting("enemy", definitions.AllEnemies, value => value.Name);
+        string id = definitions.AllEnemies[index].Id;
         EnemyDefinition replacement = CreateEnemy(definitions);
         replacement.Id = id;
-        definitions.Enemies[index] = replacement;
+        definitions.AllEnemies[index] = replacement;
     }
 
     private void EditItem(GameDefinitions definitions)
     {
-        int index = SelectExisting("item", definitions.Items, value => $"{value.Name} ({value.Id})");
-        string id = definitions.Items[index].Id;
+        int index = SelectExisting("item", definitions.AllItems, value => $"{value.Name} ({value.Id})");
+        string id = definitions.AllItems[index].Id;
         ItemDefinition replacement = CreateItem(definitions);
         replacement.Id = id;
-        definitions.Items[index] = replacement;
+        definitions.AllItems[index] = replacement;
     }
 
     private void EditAction(GameDefinitions definitions)
     {
-        int index = SelectExisting("action", definitions.Actions, value => $"{value.Name} ({value.Id})");
-        string id = definitions.Actions[index].Id;
+        int index = SelectExisting("action", definitions.AllActions, value => $"{value.Name} ({value.Id})");
+        string id = definitions.AllActions[index].Id;
         ActionDefinition replacement = CreateAction(definitions);
         replacement.Id = id;
-        definitions.Actions[index] = replacement;
+        definitions.AllActions[index] = replacement;
     }
 
     private void EditEffect(GameDefinitions definitions)
     {
-        int index = SelectExisting("effect", definitions.Effects, value => $"{value.Name} ({value.Id})");
-        string id = definitions.Effects[index].Id;
+        int index = SelectExisting("effect", definitions.AllEffects, value => $"{value.Name} ({value.Id})");
+        string id = definitions.AllEffects[index].Id;
         EffectDefinition replacement = CreateEffect(definitions);
         replacement.Id = id;
-        definitions.Effects[index] = replacement;
+        definitions.AllEffects[index] = replacement;
     }
 
     private int SelectExisting<T>(string category, IReadOnlyList<T> values, Func<T, string> getLabel)
@@ -447,12 +447,12 @@ public sealed class AdminCreator
 
     private void ListDefinitions(GameDefinitions definitions)
     {
-        _output.WriteLine($"Classes: {string.Join(", ", definitions.Classes.Select(value => value.Name))}");
-        _output.WriteLine($"Races: {string.Join(", ", definitions.Races.Select(value => value.Name))}");
-        _output.WriteLine($"Items: {string.Join(", ", definitions.Items.Select(value => value.Id))}");
-        _output.WriteLine($"Actions: {string.Join(", ", definitions.Actions.Select(value => value.Id))}");
-        _output.WriteLine($"Effects: {string.Join(", ", definitions.Effects.Select(value => value.Id))}");
-        _output.WriteLine($"Enemies: {string.Join(", ", definitions.Enemies.Select(value => value.Name))}");
+        _output.WriteLine($"Classes: {string.Join(", ", definitions.AllClasses.Select(value => value.Name))}");
+        _output.WriteLine($"Races: {string.Join(", ", definitions.AllRaces.Select(value => value.Name))}");
+        _output.WriteLine($"Items: {string.Join(", ", definitions.AllItems.Select(value => value.Id))}");
+        _output.WriteLine($"Actions: {string.Join(", ", definitions.AllActions.Select(value => value.Id))}");
+        _output.WriteLine($"Effects: {string.Join(", ", definitions.AllEffects.Select(value => value.Id))}");
+        _output.WriteLine($"Enemies: {string.Join(", ", definitions.AllEnemies.Select(value => value.Name))}");
     }
 
     private void AddUnique<T>(List<T> list, T value, Func<T, string> getKey, string category)

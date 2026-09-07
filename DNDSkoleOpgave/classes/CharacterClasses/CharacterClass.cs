@@ -21,18 +21,40 @@ public abstract class CharacterClass
     public Dictionary<int, List<string>> LevelLockedActions { get; } = [];
     public Dictionary<int, LevelUnlock> LevelUnlocks { get; } = [];
 
-    public IEnumerable<string> GetActionIdsForLevel(int level) =>
-        LevelLockedActions
-            .Where(entry => entry.Key <= level)
-            .OrderBy(entry => entry.Key)
-            .SelectMany(entry => entry.Value)
-            .Concat(LevelUnlocks
-                .Where(entry => entry.Key <= level)
-                .OrderBy(entry => entry.Key)
-                .SelectMany(entry => entry.Value.ActionIds))
-            .Distinct(StringComparer.OrdinalIgnoreCase);
+    public IEnumerable<string> GetActionIdsForLevel(int level)
+    {
+        List<string> actionIds = new();
+        AddLevelLockedActions(actionIds, level);
+        AddUnlockedActions(actionIds, level);
+        return actionIds.Distinct(StringComparer.OrdinalIgnoreCase);
+    }
 
-    public int GetBonusHealthForLevel(int level) => LevelUnlocks
-        .Where(entry => entry.Key <= level)
-        .Sum(entry => entry.Value.HealthBonus);
+    private void AddLevelLockedActions(List<string> actionIds, int level)
+    {
+        foreach (var entry in LevelLockedActions.OrderBy(entry => entry.Key))
+        {
+            if (entry.Key <= level)
+                actionIds.AddRange(entry.Value);
+        }
+    }
+
+    private void AddUnlockedActions(List<string> actionIds, int level)
+    {
+        foreach (var entry in LevelUnlocks.OrderBy(entry => entry.Key))
+        {
+            if (entry.Key <= level)
+                actionIds.AddRange(entry.Value.ActionIds);
+        }
+    }
+
+    public int GetBonusHealthForLevel(int level)
+    {
+        int bonusHealth = 0;
+        foreach (var entry in LevelUnlocks)
+        {
+            if (entry.Key <= level)
+                bonusHealth += entry.Value.HealthBonus;
+        }
+        return bonusHealth;
+    }
 }

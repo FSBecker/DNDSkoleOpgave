@@ -4,7 +4,7 @@ namespace DNDSkoleOpgave.CharacterClasses;
 
 public sealed class Wizard : CharacterClass
 {
-    public Wizard() : base("Wizard", "A spellcaster who uses intelligence.", 6, 4)
+    public Wizard() : base("Wizard", "A spellcaster who uses intelligence.", 18, 2)
     {
         StatBuffs[CharacterStat.Intelligence] = 2;
         StartingItemIds.AddRange(["crystal-staff", "wizard-robes", "orb"]);

@@ -7,8 +7,8 @@ namespace DNDSkoleOpgave.Characters;
 
 public static class CharacterCreator
 {
-    public static IReadOnlyList<string> AvailableClasses => CharacterClassCreator.AvailableNames;
-    public static IReadOnlyList<string> AvailableRaces => CharacterRaceCreator.AvailableNames;
+    public static IReadOnlyList<string> AvailableClasses => CharacterClassCreator.AllClassNames;
+    public static IReadOnlyList<string> AvailableRaces => CharacterRaceCreator.AllRaceNames;
 
     public static PlayerCharacter Create(
         string characterName,
@@ -41,7 +41,7 @@ public static class CharacterCreator
         foreach (string itemId in character.CharacterClass.StartingItemIds)
         {
             CoreItem item = ItemCreator.Create(itemId);
-            character.Inventory.Add(item);
+            character.AddItem(item);
 
             if (item is EquipmentItem equipment && character.Equipment[equipment.EquipmentSlot] is null)
             {

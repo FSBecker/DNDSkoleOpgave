@@ -4,7 +4,7 @@ namespace DNDSkoleOpgave.CharacterClasses;
 
 public sealed class Barbarian : CharacterClass
 {
-    public Barbarian() : base("Barbarian", "A strong close-combat fighter.", 12, 7)
+    public Barbarian() : base("Barbarian", "A strong close-combat fighter.", 24, 3)
     {
         StatBuffs[CharacterStat.Strength] = 2;
         StartingItemIds.Add("great-axe");

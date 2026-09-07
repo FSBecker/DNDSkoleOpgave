@@ -15,7 +15,7 @@ public abstract class CombatAction
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(id);
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
-        ArgumentOutOfRangeException.ThrowIfNegative(actionCost);
+        ArgumentOutOfRangeException.ThrowIfLessThan(actionCost, 1);
         ArgumentOutOfRangeException.ThrowIfLessThan(diceAmount, 1);
         ArgumentOutOfRangeException.ThrowIfLessThan(diceSides, 2);
 
@@ -36,4 +36,6 @@ public abstract class CombatAction
     public List<ActionEffect> Effects { get; } = [];
 
     public int RollDamage() => DiceRoller.Roll(DiceAmount, DiceSides);
+
+    public int RollDamage(IDiceRoller dice) => DiceRoller.Roll(DiceAmount, DiceSides, dice);
 }

@@ -18,7 +18,14 @@ public static class ActionCatalog
         ["witch-bolt"] = new WitchBolt()
     };
 
-    public static IReadOnlyDictionary<string, CombatAction> All => Actions;
+    public static IReadOnlyDictionary<string, CombatAction> AllActions => Actions;
+
+    public static void Load(Persistence.GameDefinitions definitions)
+    {
+        Actions.Clear();
+        foreach (Persistence.ActionDefinition action in definitions.AllActions)
+            Actions.Add(action.Id, CombatActionCreator.Create(action, definitions));
+    }
 
     public static CombatAction Get(string id) =>
         Actions.TryGetValue(id, out CombatAction? action)
