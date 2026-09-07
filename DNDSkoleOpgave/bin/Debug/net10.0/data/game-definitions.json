@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "classes": [
+    {
+      "name": "Barbarian",
+      "description": "A strong close-combat fighter.",
+      "baseHealth": 12,
+      "healthPerLevel": 7,
+      "statBuffs": {
+        "Strength": 2
+      },
+      "startingItemIds": [
+        "great-axe"
+      ],
+      "levelLockedActionIds": {
+        "1": [
+          "great-axe-swing"
+        ]
+      }
+    },
+    {
+      "name": "Ranger",
+      "description": "A quick and resourceful wilderness fighter.",
+      "baseHealth": 8,
+      "healthPerLevel": 5,
+      "statBuffs": {
+        "Dexterity": 2
+      },
+      "startingItemIds": [
+        "light-leather-armor",
+        "bow",
+        "short-sword"
+      ],
+      "levelLockedActionIds": {
+        "1": [
+          "bow-shot",
+          "short-sword-strike"
+        ]
+      }
+    },
+    {
+      "name": "Wizard",
+      "description": "A spellcaster who uses intelligence.",
+      "baseHealth": 6,
+      "healthPerLevel": 4,
+      "statBuffs": {
+        "Intelligence": 2
+      },
+      "startingItemIds": [
+        "crystal-staff",
+        "wizard-robes",
+        "orb"
+      ],
+      "levelLockedActionIds": {
+        "1": [
+          "staff-strike",
+          "healing-hand",
+          "weak-fireball",
+          "witch-bolt"
+        ]
+      }
+    }
+  ],
+  "races": [
+    {
+      "name": "Dwarf",
+      "description": "A sturdy and powerful race.",
+      "statBuffs": {
+        "Constitution": 2,
+        "Strength": 1
+      }
+    },
+    {
+      "name": "Elf",
+      "description": "A graceful race with keen intellect.",
+      "statBuffs": {
+        "Dexterity": 2,
+        "Intelligence": 1
+      }
+    },
+    {
+      "name": "Human",
+      "description": "A versatile and adaptable race.",
+      "statBuffs": {
+        "Strength": 1,
+        "Dexterity": 1,
+        "Constitution": 1
+      }
+    },
+    {
+      "name": "Half-Orc",
+      "description": "Green, mean and lean",
+      "statBuffs": {
+        "Strength": 3
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "bow",
+      "name": "Bow",
+      "itemType": "Weapon",
+      "equipmentSlot": "MainWeapon",
+      "armorClass": 0,
+      "weaponType": "Bow",
+      "actionIds": [
+        "bow-shot"
+      ]
+    },
+    {
+      "id": "short-sword",
+      "name": "Short Sword",
+      "itemType": "Weapon",
+      "equipmentSlot": "MainWeapon",
+      "armorClass": 0,
+      "weaponType": "ShortSword",
+      "actionIds": [
+        "short-sword-strike"
+      ]
+    },
+    {
+      "id": "axe",
+      "name": "Axe",
+      "itemType": "Weapon",
+      "equipmentSlot": "MainWeapon",
+      "armorClass": 0,
+      "weaponType": "Axe",
+      "actionIds": [
+        "axe-swing"
+      ]
+    },
+    {
+      "id": "staff",
+      "name": "Staff",
+      "itemType": "Weapon",
+      "equipmentSlot": "MainWeapon",
+      "armorClass": 0,
+      "weaponType": "Staff",
+      "actionIds": [
+        "staff-strike"
+      ]
+    },
+    {
+      "id": "wooden-shield",
+      "name": "Wooden Shield",
+      "itemType": "Shield",
+      "equipmentSlot": "OffhandWeapon",
+      "armorClass": 2,
+      "actionIds": []
+    },
+    {
+      "id": "crystal-staff",
+      "name": "Crystal Staff",
+      "itemType": "Weapon",
+      "equipmentSlot": "MainWeapon",
+      "armorClass": 0,
+      "weaponType": "Staff",
+      "actionIds": [
+        "staff-strike"
+      ]
+    },
+    {
+      "id": "wizard-robes",
+      "name": "Wizard Robes",
+      "itemType": "Equipment",
+      "equipmentSlot": "ChestArmor",
+      "armorClass": 1,
+      "actionIds": []
+    },
+    {
+      "id": "orb",
+      "name": "Orb",
+      "itemType": "Equipment",
+      "equipmentSlot": "OffhandWeapon",
+      "armorClass": 0,
+      "actionIds": []
+    },
+    {
+      "id": "light-leather-armor",
+      "name": "Light Leather Armor",
+      "itemType": "Equipment",
+      "equipmentSlot": "ChestArmor",
+      "armorClass": 2,
+      "actionIds": []
+    },
+    {
+      "id": "great-axe",
+      "name": "Great Axe",
+      "itemType": "Weapon",
+      "equipmentSlot": "MainWeapon",
+      "armorClass": 0,
+      "weaponType": "Axe",
+      "actionIds": [
+        "great-axe-swing"
+      ]
+    },
+    {
+      "id": "h61hk7vXOn",
+      "name": "Golden Ritual Mask",
+      "itemType": "Equipment",
+      "equipmentSlot": "Helmet",
+      "armorClass": 2,
+      "actionIds": []
+    }
+  ],
+  "actions": [
+    {
+      "id": "bow-shot",
+      "name": "Bow Shot",
+      "kind": "attack",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 8,
+      "primaryStat": "Dexterity",
+      "effects": [],
+      "effectIds": []
+    },
+    {
+      "id": "short-sword-strike",
+      "name": "Short Sword Strike",
+      "kind": "attack",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 6,
+      "primaryStat": "Dexterity",
+      "effects": [],
+      "effectIds": []
+    },
+    {
+      "id": "axe-swing",
+      "name": "Axe Swing",
+      "kind": "attack",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 8,
+      "primaryStat": "Strength",
+      "effects": [],
+      "effectIds": []
+    },
+    {
+      "id": "great-axe-swing",
+      "name": "Great Axe Swing",
+      "kind": "attack",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 12,
+      "primaryStat": "Strength",
+      "effects": [],
+      "effectIds": []
+    },
+    {
+      "id": "staff-strike",
+      "name": "Staff Strike",
+      "kind": "attack",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 6,
+      "primaryStat": "Strength",
+      "effects": [],
+      "effectIds": []
+    },
+    {
+      "id": "healing-hand",
+      "name": "Healing Hand",
+      "kind": "spell",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 4,
+      "primaryStat": "Intelligence",
+      "targetsAlly": true,
+      "effects": [],
+      "effectIds": []
+    },
+    {
+      "id": "weak-fireball",
+      "name": "Weak Fireball",
+      "kind": "spell",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 4,
+      "primaryStat": "Intelligence",
+      "targetsAlly": false,
+      "savingThrowDifficulty": 10,
+      "burningDamageDiceSides": 4,
+      "burningDurationDiceSides": 4,
+      "effects": [],
+      "effectIds": []
+    },
+    {
+      "id": "witch-bolt",
+      "name": "Witch Bolt",
+      "kind": "spell",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 6,
+      "primaryStat": "Intelligence",
+      "targetsAlly": false,
+      "effects": [],
+      "effectIds": []
+    }
+  ],
+  "effects": []
+}

@@ -114,6 +114,20 @@ public abstract class CoreCharacter : IDamageable
         }
     }
 
+    public void RestoreState(int currentHealth, int deathRolls, int actionPoints)
+    {
+        if (currentHealth < 0 || currentHealth > MaximumHealth)
+        {
+            throw new ArgumentOutOfRangeException(nameof(currentHealth));
+        }
+
+        ArgumentOutOfRangeException.ThrowIfNegative(deathRolls);
+        ArgumentOutOfRangeException.ThrowIfNegative(actionPoints);
+        CurrentHealth = currentHealth;
+        DeathRolls = deathRolls;
+        ActionPoints = actionPoints;
+    }
+
     private void ApplyStatBuffs(IReadOnlyDictionary<CharacterStat, int> buffs)
     {
         foreach ((CharacterStat stat, int buff) in buffs)

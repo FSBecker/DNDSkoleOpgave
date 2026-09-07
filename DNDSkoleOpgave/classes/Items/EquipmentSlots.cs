@@ -7,6 +7,9 @@ public sealed class EquipmentSlots
     private readonly Dictionary<EquipmentSlot, EquipmentItem> _items = [];
 
     public EquipmentItem? this[EquipmentSlot slot] => _items.GetValueOrDefault(slot);
+    public IReadOnlyDictionary<EquipmentSlot, EquipmentItem> All => _items;
+
+    public void Clear() => _items.Clear();
 
     public void Equip(EquipmentItem item)
     {

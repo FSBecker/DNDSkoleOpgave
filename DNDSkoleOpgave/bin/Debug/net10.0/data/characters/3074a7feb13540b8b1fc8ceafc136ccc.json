@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "id": "3074a7feb13540b8b1fc8ceafc136ccc",
+  "name": "Frederik",
+  "level": 1,
+  "class": "Barbarian",
+  "race": "Human",
+  "baseStats": [
+    10,
+    10,
+    10,
+    10
+  ],
+  "currentHealth": 12,
+  "deathRolls": 0,
+  "actionPoints": 1,
+  "inventoryItemIds": [
+    "great-axe"
+  ],
+  "equipment": [
+    {
+      "slot": "MainWeapon",
+      "itemId": "great-axe"
+    }
+  ],
+  "actionIds": [
+    "great-axe-swing"
+  ]
+}
