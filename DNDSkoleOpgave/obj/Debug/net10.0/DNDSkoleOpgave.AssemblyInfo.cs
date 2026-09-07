@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DNDSkoleOpgave")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e52ec18340d7df813f3ed0d047c78c3e3dffdf4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6fdd61890c9e8a76f3c6093ca1b9103be3b15fa")]
 [assembly: System.Reflection.AssemblyProductAttribute("DNDSkoleOpgave")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DNDSkoleOpgave")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
