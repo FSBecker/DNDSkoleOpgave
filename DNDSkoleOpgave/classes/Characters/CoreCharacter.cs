@@ -50,6 +50,7 @@ public abstract class CoreCharacter : IDamageable
     public CharacterRace CharacterRace { get; }
     public List<CoreItem> Inventory { get; } = [];
     public EquipmentSlots Equipment { get; } = new();
+    public List<CombatAction> Actions { get; } = [];
     public bool IsDefeated => CurrentHealth <= 0;
 
     public int CalculateArmorClass() =>
@@ -96,8 +97,21 @@ public abstract class CoreCharacter : IDamageable
     public void LevelUp()
     {
         Level++;
+        UnlockActionsForCurrentLevel();
         MaximumHealth = CalculateHealth();
         CurrentHealth = MaximumHealth;
+    }
+
+    public void UnlockActionsForCurrentLevel()
+    {
+        HashSet<string> knownActionIds = Actions.Select(action => action.ID).ToHashSet();
+        foreach (string actionId in CharacterClass.GetActionIdsForLevel(Level))
+        {
+            if (knownActionIds.Add(actionId))
+            {
+                Actions.Add(Utilities.ActionCatalog.Get(actionId));
+            }
+        }
     }
 
     private void ApplyStatBuffs(IReadOnlyDictionary<CharacterStat, int> buffs)

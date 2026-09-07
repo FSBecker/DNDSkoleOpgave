@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using DNDSkoleOpgave.Characters;
+
+ConsoleCharacterCreator characterCreator = new(Console.In, Console.Out);
+PlayerCharacter player = characterCreator.Create();

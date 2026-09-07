@@ -7,6 +7,7 @@ public sealed class Ranger : CharacterClass
     public Ranger() : base("Ranger", "A quick and resourceful wilderness fighter.", 8, 5)
     {
         StatBuffs[CharacterStat.Dexterity] = 2;
-        LevelLockedActions[1] = "bow-shot";
+        StartingItemIds.AddRange(["light-leather-armor", "bow", "short-sword"]);
+        LevelLockedActions[1] = ["bow-shot", "short-sword-strike"];
     }
 }

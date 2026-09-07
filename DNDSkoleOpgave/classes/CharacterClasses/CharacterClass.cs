@@ -17,5 +17,12 @@ public abstract class CharacterClass
     public int BaseHealth { get; }
     public int HealthPerLevel { get; }
     public Dictionary<CharacterStat, int> StatBuffs { get; } = [];
-    public Dictionary<int, string> LevelLockedActions { get; } = [];
+    public List<string> StartingItemIds { get; } = [];
+    public Dictionary<int, List<string>> LevelLockedActions { get; } = [];
+
+    public IEnumerable<string> GetActionIdsForLevel(int level) =>
+        LevelLockedActions
+            .Where(entry => entry.Key <= level)
+            .OrderBy(entry => entry.Key)
+            .SelectMany(entry => entry.Value);
 }

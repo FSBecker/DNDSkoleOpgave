@@ -3,7 +3,7 @@ using DNDSkoleOpgave.Utilities;
 
 namespace DNDSkoleOpgave.Combat;
 
-public sealed class CombatAction
+public abstract class CombatAction
 {
     public CombatAction(
         string id,
