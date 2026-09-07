@@ -1,0 +1,1058 @@
+{
+  "version": "31.4.2",
+  "pages": [
+    {
+      "id": "L8jvFjhJhwc2-ZMEtdEo",
+      "name": "Page-1",
+      "cells": [
+        {
+          "id": "1",
+          "type": "layer"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-140",
+          "type": "node",
+          "parent": "1"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-144",
+          "type": "node",
+          "parent": "1"
+        },
+        {
+          "id": "3zGotrOS1wBVqZgXd7lC-2",
+          "type": "node",
+          "parent": "1",
+          "label": "CoreCharacter"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-37",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "Int CurrentHealth"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-157",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "characterName"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-160",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "&nbsp;int level"
+        },
+        {
+          "id": "3zGotrOS1wBVqZgXd7lC-3",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "string ID"
+        },
+        {
+          "id": "3zGotrOS1wBVqZgXd7lC-4",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2"
+        },
+        {
+          "id": "3zGotrOS1wBVqZgXd7lC-5",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "int Level"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-27",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "_charClass"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-30",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "_charRace"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-13",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "_equipmentSlots"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-9",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "CalculateAC()",
+          "html": "<div align=\"left\">CalculateAC()</div>"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-4",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "int DeathRolls",
+          "html": "<div align=\"left\">int DeathRolls</div>"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-6",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "CalculateHealth()",
+          "html": "<div align=\"left\">CalculateHealth()</div>"
+        },
+        {
+          "id": "3zGotrOS1wBVqZgXd7lC-16",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "&nbsp;CalculateDamage(CoreAction action)"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-33",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "int ActionPoints"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-19",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "List&lt;CoreItem&gt; Inventory"
+        },
+        {
+          "id": "3zGotrOS1wBVqZgXd7lC-17",
+          "type": "node",
+          "parent": "3zGotrOS1wBVqZgXd7lC-2",
+          "label": "int[] StatArray",
+          "html": "<div align=\"left\">int[] StatArray</div>"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "type": "node",
+          "parent": "1",
+          "label": "Abstract CharacterClass",
+          "html": "<i style=\"font-weight: normal;\">Abstract</i> CharacterClass"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-154",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "label": "Dict&lt;stat,buff&gt; _statBuffs"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-12",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "label": "string ClassName"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-13",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "label": "string classDescription"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-161",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "label": "Dict &lt;int(level), string(ID)&gt; levelLockedActions"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-5",
+          "type": "node",
+          "parent": "1",
+          "label": "Abstract CharacterRace",
+          "html": "<i style=\"font-weight: normal;\">Abstract</i> CharacterRace"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-7",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-5",
+          "label": "string raceName",
+          "html": "<div>&nbsp;string raceName</div>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-156",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-5",
+          "label": "string raceDescription",
+          "html": "<span style=\"text-align: left;\">string raceDescription</span>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-155",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-5",
+          "label": "Dict<stat,buff> _statBuffs",
+          "html": "<span style=\"\"><br><span style=\"font-family: Helvetica; font-size: 12px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\">Dict&lt;stat,buff&gt; _statBuffs</span><br class=\"Apple-interchange-newline\"><br></span>"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-9",
+          "type": "node",
+          "parent": "1",
+          "label": ": IDamageable"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-158",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-9",
+          "label": "&nbsp;Heal()"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-159",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-9",
+          "label": "&nbsp;ResetHealth()"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-10",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-9",
+          "label": "TakeDamage()"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-13",
+          "type": "node",
+          "parent": "1",
+          "label": "PlayerChar : CoreCharacter"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-16",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-13",
+          "label": "int Level"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-18",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-13",
+          "label": "Object"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-19",
+          "type": "node",
+          "parent": "1",
+          "label": "EnemyChar : CoreCharacter"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-22",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-19",
+          "label": "int Level"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-24",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-19",
+          "label": "Object"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-25",
+          "type": "edge",
+          "parent": "1",
+          "source": "3zGotrOS1wBVqZgXd7lC-17",
+          "target": "Iy2DTZMoDcWDptwUAB1Q-19",
+          "label": "Inheritance",
+          "html": "<div><span style=\"color: light-dark(rgb(255, 255, 255), rgb(255, 255, 255)); background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));\">Inheritance</span></div>"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-26",
+          "type": "edge",
+          "parent": "1",
+          "source": "3zGotrOS1wBVqZgXd7lC-17",
+          "target": "Iy2DTZMoDcWDptwUAB1Q-13",
+          "label": "Inheritance"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-29",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "target": "Iy2DTZMoDcWDptwUAB1Q-27"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-31",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-5",
+          "target": "Iy2DTZMoDcWDptwUAB1Q-30"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-32",
+          "type": "node",
+          "parent": "1",
+          "label": "Static DiceRoller",
+          "html": "<span style=\"font-weight: normal;\">Static </span>DiceRoller"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-33",
+          "type": "node",
+          "parent": "Iy2DTZMoDcWDptwUAB1Q-32",
+          "label": "int RollWithSides(amount)"
+        },
+        {
+          "id": "Iy2DTZMoDcWDptwUAB1Q-36",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-9",
+          "target": "3zGotrOS1wBVqZgXd7lC-2"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-7",
+          "type": "node",
+          "parent": "1",
+          "label": "Level damagedie giver hp\nNår du skal heale short rest",
+          "html": "<div>Level damagedie giver hp</div><div>Når du skal heale short rest</div>"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-8",
+          "type": "node",
+          "parent": "1",
+          "label": "string type\nint amount",
+          "html": "<div>string type</div><div>int amount</div><div><br></div>"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-1",
+          "type": "node",
+          "parent": "1",
+          "label": "Abstract EquipmentSlots",
+          "html": "<i style=\"font-weight: normal;\">Abstract</i>&nbsp;EquipmentSlots"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-2",
+          "type": "node",
+          "parent": "3grahXqlOo8XYKcBTDUO-1",
+          "label": "_helmet"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-11",
+          "type": "node",
+          "parent": "3grahXqlOo8XYKcBTDUO-1",
+          "label": "_chestArmor"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-34",
+          "type": "node",
+          "parent": "3grahXqlOo8XYKcBTDUO-1",
+          "label": "_pants"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-37",
+          "type": "node",
+          "parent": "3grahXqlOo8XYKcBTDUO-1",
+          "label": "_boots"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-90",
+          "type": "node",
+          "parent": "3grahXqlOo8XYKcBTDUO-1",
+          "label": "_mainWeapon"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-91",
+          "type": "node",
+          "parent": "3grahXqlOo8XYKcBTDUO-1",
+          "label": "_offhandWeapon"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-4",
+          "type": "node",
+          "parent": "1",
+          "label": "EquipmentHelmet"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-7",
+          "type": "node",
+          "parent": "1",
+          "label": "EquipmentChestArmor"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-10",
+          "type": "edge",
+          "parent": "1",
+          "source": "3grahXqlOo8XYKcBTDUO-4",
+          "target": "3grahXqlOo8XYKcBTDUO-2"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-12",
+          "type": "edge",
+          "parent": "1",
+          "source": "3grahXqlOo8XYKcBTDUO-7",
+          "target": "3grahXqlOo8XYKcBTDUO-11"
+        },
+        {
+          "id": "3grahXqlOo8XYKcBTDUO-14",
+          "type": "edge",
+          "parent": "1",
+          "source": "3grahXqlOo8XYKcBTDUO-1",
+          "target": "3grahXqlOo8XYKcBTDUO-13"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-15",
+          "type": "node",
+          "parent": "1",
+          "label": "Abstract CoreItem",
+          "html": "<span style=\"font-weight: normal;\"><i>Abstract </i></span>CoreItem"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-16",
+          "type": "node",
+          "parent": "4JcEnWHBFyhkml_oTx8M-15",
+          "label": "string ID"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-178",
+          "type": "node",
+          "parent": "4JcEnWHBFyhkml_oTx8M-15",
+          "label": "Enum equipmentSlot"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-18",
+          "type": "node",
+          "parent": "4JcEnWHBFyhkml_oTx8M-15",
+          "label": "enum ITEMTYPE"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-21",
+          "type": "node",
+          "parent": "1",
+          "label": "CombatAction"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-22",
+          "type": "node",
+          "parent": "4JcEnWHBFyhkml_oTx8M-21",
+          "label": "string ID"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-162",
+          "type": "node",
+          "parent": "4JcEnWHBFyhkml_oTx8M-21",
+          "label": "string actionName"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-166",
+          "type": "node",
+          "parent": "4JcEnWHBFyhkml_oTx8M-21",
+          "label": "Int actionCost"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-167",
+          "type": "node",
+          "parent": "4JcEnWHBFyhkml_oTx8M-21",
+          "label": "Effects list(ActionEffect)"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-5",
+          "type": "node",
+          "parent": "1",
+          "label": "CharacterClass Barbarian",
+          "html": "<span style=\"font-weight: 400;\"><i>CharacterClass&nbsp;</i></span>Barbarian"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-8",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-5",
+          "label": "DmgDice"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-9",
+          "type": "node",
+          "parent": "1",
+          "label": "CharacterClass Sneakingbro",
+          "html": "<span style=\"font-weight: 400;\"><i>CharacterClass&nbsp;</i></span>Sneakingbro"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-12",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-9",
+          "label": "DmgDice"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-13",
+          "type": "node",
+          "parent": "1",
+          "label": "CharacterClass Wizard",
+          "html": "<span style=\"font-weight: 400;\"><i>CharacterClass&nbsp;</i></span>Wizard"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-16",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-13",
+          "label": "DmgDice"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-17",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "target": "0HRDEpiYpZs4djVL73WS-5"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-18",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "target": "0HRDEpiYpZs4djVL73WS-9"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-19",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-1",
+          "target": "0HRDEpiYpZs4djVL73WS-13"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-20",
+          "type": "node",
+          "parent": "1",
+          "label": "CharacterRace Human",
+          "html": "<span style=\"font-weight: 400;\"><i>CharacterRace&nbsp;</i></span>Human"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-23",
+          "type": "node",
+          "parent": "1",
+          "label": "CharacterRace Dwarf",
+          "html": "<span style=\"font-weight: 400;\"><i>CharacterRace&nbsp;</i></span>Dwarf"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-26",
+          "type": "node",
+          "parent": "1",
+          "label": "CharacterRace Elf",
+          "html": "<span style=\"font-weight: 400;\"><i>CharacterRace&nbsp;</i></span>Elf"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-29",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-5",
+          "target": "0HRDEpiYpZs4djVL73WS-20"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-30",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-5",
+          "target": "0HRDEpiYpZs4djVL73WS-23"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-31",
+          "type": "edge",
+          "parent": "1",
+          "source": "Iy2DTZMoDcWDptwUAB1Q-5",
+          "target": "0HRDEpiYpZs4djVL73WS-26"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-38",
+          "type": "node",
+          "parent": "1",
+          "label": "EquipmentPants"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-41",
+          "type": "node",
+          "parent": "1",
+          "label": "EquipmentBoots"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-44",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-38",
+          "target": "0HRDEpiYpZs4djVL73WS-34"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-45",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-41",
+          "target": "0HRDEpiYpZs4djVL73WS-37"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-46",
+          "type": "node",
+          "parent": "1",
+          "label": "Abstract EquipmentItem",
+          "html": "<i style=\"font-weight: normal;\">Abstract</i>&nbsp;EquipmentItem"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-177",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-46",
+          "label": "Enum equipmentType"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-47",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-46",
+          "label": "Int AC"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-49",
+          "type": "edge",
+          "parent": "1",
+          "source": "3grahXqlOo8XYKcBTDUO-4",
+          "target": "0HRDEpiYpZs4djVL73WS-46"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-53",
+          "type": "edge",
+          "parent": "1",
+          "source": "3grahXqlOo8XYKcBTDUO-7",
+          "target": "0HRDEpiYpZs4djVL73WS-46"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-57",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-38",
+          "target": "0HRDEpiYpZs4djVL73WS-46"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-58",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-41",
+          "target": "0HRDEpiYpZs4djVL73WS-46"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-60",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-46",
+          "target": "4JcEnWHBFyhkml_oTx8M-15"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-62",
+          "type": "node",
+          "parent": "1",
+          "label": "Abstract WeaponItem",
+          "html": "<i style=\"font-weight: normal;\">Abstract</i>&nbsp;WeaponItem"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-63",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-62",
+          "label": "GetActions()",
+          "html": "<div>GetActions()</div>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-175",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-62",
+          "label": "&nbsp;Enum WeaponType"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-68",
+          "type": "node",
+          "parent": "1",
+          "label": "WeaponBow"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-71",
+          "type": "node",
+          "parent": "1",
+          "label": "WeaponShortSword"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-74",
+          "type": "node",
+          "parent": "1",
+          "label": "WeaponAxe"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-77",
+          "type": "node",
+          "parent": "1",
+          "label": "WeaponStaff"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-80",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-68",
+          "target": "0HRDEpiYpZs4djVL73WS-62"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-81",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-71",
+          "target": "0HRDEpiYpZs4djVL73WS-62"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-82",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-74",
+          "target": "0HRDEpiYpZs4djVL73WS-62"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-83",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-77",
+          "target": "0HRDEpiYpZs4djVL73WS-62"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-84",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-62",
+          "target": "4JcEnWHBFyhkml_oTx8M-15"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-92",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-62",
+          "target": "0HRDEpiYpZs4djVL73WS-90"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-93",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-62",
+          "target": "0HRDEpiYpZs4djVL73WS-91"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-94",
+          "type": "node",
+          "parent": "1",
+          "label": "Shield"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-97",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-94",
+          "target": "0HRDEpiYpZs4djVL73WS-62"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-99",
+          "type": "node",
+          "parent": "1",
+          "label": "PlayerChar : CoreCharacter"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-100",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-99",
+          "label": "string ID"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-101",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-99"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-102",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-99",
+          "label": "int Level"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-103",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-99",
+          "label": "Object"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-110",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-104",
+          "target": "0HRDEpiYpZs4djVL73WS-105"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-104",
+          "type": "node",
+          "parent": "1",
+          "label": "Character Setup\n-Select race\n-select Class\n-select name",
+          "html": "Character Setup<div>-Select race</div><div>-select Class<br>-select name</div>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-105",
+          "type": "node",
+          "parent": "1",
+          "label": "Enemy Combat Instance"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-112",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-106",
+          "target": "0HRDEpiYpZs4djVL73WS-107"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-106",
+          "type": "node",
+          "parent": "1",
+          "label": "Turn determintaion"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-123",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-107",
+          "target": "0HRDEpiYpZs4djVL73WS-108"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-107",
+          "type": "node",
+          "parent": "1",
+          "label": "Combat Loop"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-124",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-108",
+          "target": "0HRDEpiYpZs4djVL73WS-109",
+          "label": "YES"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-126",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-108",
+          "target": "0HRDEpiYpZs4djVL73WS-115",
+          "label": "NO"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-108",
+          "type": "node",
+          "parent": "1",
+          "label": "If player turn"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-125",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-109",
+          "target": "0HRDEpiYpZs4djVL73WS-117"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-109",
+          "type": "node",
+          "parent": "1",
+          "label": "Spawn choices"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-111",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-105"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-128",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-115",
+          "target": "0HRDEpiYpZs4djVL73WS-119"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-115",
+          "type": "node",
+          "parent": "1",
+          "label": "Calculate Enemy Damage"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-127",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-117",
+          "target": "0HRDEpiYpZs4djVL73WS-119"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-117",
+          "type": "node",
+          "parent": "1",
+          "label": "Pick, and calculate Player Damage"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-131",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-120",
+          "target": "0HRDEpiYpZs4djVL73WS-130",
+          "label": "YES",
+          "html": "<font style=\"font-size: 19px;\">YES</font>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-137",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-119",
+          "target": "0HRDEpiYpZs4djVL73WS-136"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-119",
+          "type": "node",
+          "parent": "1",
+          "label": "Is Player Defeated?"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-129",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-120",
+          "target": "0HRDEpiYpZs4djVL73WS-107",
+          "label": "NO",
+          "html": "<font style=\"font-size: 20px;\">NO</font>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-120",
+          "type": "node",
+          "parent": "1",
+          "label": "Is Enemy Defeated?"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-121",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-119",
+          "target": "0HRDEpiYpZs4djVL73WS-120",
+          "label": "NO",
+          "html": "<font style=\"font-size: 20px;\">NO</font>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-142",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-130",
+          "target": "jAjbU8nz3luWdCnGMAsP-14"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-130",
+          "type": "node",
+          "parent": "1",
+          "label": "Loot",
+          "html": "<font>Loot</font>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-136",
+          "type": "node",
+          "parent": "1",
+          "label": "Game over!"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-6",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-141",
+          "target": "0HRDEpiYpZs4djVL73WS-105"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-141",
+          "type": "node",
+          "parent": "1",
+          "label": "Next Wave",
+          "html": "<font>Next Wave</font>"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-143",
+          "type": "node",
+          "parent": "1",
+          "label": "CombatInstance"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-145",
+          "type": "node",
+          "parent": "1",
+          "label": "CheckEndState"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-34",
+          "type": "node",
+          "parent": "1",
+          "label": "Strength\nDexterity\nConstituion\nInteligence",
+          "html": "<div>Strength</div><div>Dexterity</div><div>Constituion</div><div>Inteligence</div>"
+        },
+        {
+          "id": "4JcEnWHBFyhkml_oTx8M-36",
+          "type": "node",
+          "parent": "1",
+          "label": "Human +1str +1dex+1con\nElf +2 dex + 1 int\nDwarf +2 con + 1 sr",
+          "html": "<div>Human +1str +1dex+1con</div><div>Elf +2 dex + 1 int</div><div>Dwarf +2 con + 1 sr</div>"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-14",
+          "type": "node",
+          "parent": "1",
+          "label": "Level up?",
+          "html": "<font style=\"font-size: 17px;\">Level up?</font>"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-15",
+          "type": "edge",
+          "parent": "1"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-16",
+          "type": "edge",
+          "parent": "1"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-17",
+          "type": "edge",
+          "parent": "1"
+        },
+        {
+          "id": "jAjbU8nz3luWdCnGMAsP-18",
+          "type": "edge",
+          "parent": "1",
+          "source": "jAjbU8nz3luWdCnGMAsP-14",
+          "target": "0HRDEpiYpZs4djVL73WS-141"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-165",
+          "type": "node",
+          "parent": "1",
+          "label": "Static Dict&lt;string(ID), CombatAction&gt; ActionCatalog"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-168",
+          "type": "node",
+          "parent": "1",
+          "label": "Static Dict&lt;string(ID), CoreItem&gt; ItemCatalog"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-169",
+          "type": "node",
+          "parent": "1",
+          "label": "ActionEffect"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-170",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-169",
+          "label": "string ID"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-171",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-169",
+          "label": "string actionName"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-172",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-169",
+          "label": "Int actionCost"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-173",
+          "type": "node",
+          "parent": "0HRDEpiYpZs4djVL73WS-169",
+          "label": "Effects list"
+        },
+        {
+          "id": "0HRDEpiYpZs4djVL73WS-174",
+          "type": "edge",
+          "parent": "1",
+          "source": "0HRDEpiYpZs4djVL73WS-167"
+        }
+      ]
+    }
+  ]
+}
