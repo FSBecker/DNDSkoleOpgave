@@ -15,4 +15,6 @@ public static class CharacterClassCreator
             _ => throw new ArgumentException($"Unknown character class '{name}'.", nameof(name))
         };
     }
+
+    public static CharacterClass Create(Persistence.ClassDefinition definition) => new DefinedCharacterClass(definition);
 }

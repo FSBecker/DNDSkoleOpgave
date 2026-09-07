@@ -66,7 +66,8 @@ public sealed class ConsoleCharacterCreator
         _output.WriteLine($"Created {character.CharacterName}, a {character.CharacterRace.RaceName} {character.CharacterClass.ClassName}.");
         _output.WriteLine($"Health: {character.CurrentHealth}/{character.MaximumHealth}");
         _output.WriteLine($"Armor class: {character.CalculateArmorClass()}");
-        _output.WriteLine($"Equipment: {string.Join(", ", character.Inventory.Select(item => item.Name))}");
+        _output.WriteLine($"Equipped: {string.Join(", ", character.Equipment.All.Values.Select(item => item.Name))}");
+        _output.WriteLine($"Inventory: {string.Join(", ", character.Inventory.Select(item => item.Name))}");
         _output.WriteLine($"Actions: {string.Join(", ", character.Actions.Select(action => action.Name))}");
     }
 }

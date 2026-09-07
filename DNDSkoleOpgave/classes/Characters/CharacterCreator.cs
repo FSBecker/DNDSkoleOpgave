@@ -32,7 +32,7 @@ public static class CharacterCreator
             baseStats);
 
         GiveStartingItems(character);
-        character.UnlockActionsForCurrentLevel();
+        character.ApplyLevelRewardsForCurrentLevel();
         return character;
     }
 
@@ -45,7 +45,7 @@ public static class CharacterCreator
 
             if (item is EquipmentItem equipment && character.Equipment[equipment.EquipmentSlot] is null)
             {
-                character.Equipment.Equip(equipment);
+                character.EquipItem(equipment);
             }
         }
     }

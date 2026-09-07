@@ -11,6 +11,9 @@ public sealed class RaceDefinition
     [JsonProperty("description", Required = Required.Always)]
     public string Description { get; set; } = string.Empty;
 
+    [JsonProperty("enemyOnly")]
+    public bool EnemyOnly { get; set; }
+
     [JsonProperty("statBuffs", Required = Required.Always)]
     public Dictionary<CharacterStat, int> StatBuffs { get; set; } = [];
 }

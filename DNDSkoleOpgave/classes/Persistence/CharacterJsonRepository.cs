@@ -72,14 +72,20 @@ public sealed class CharacterJsonRepository
             EquipmentItem item = character.Inventory
                 .OfType<EquipmentItem>()
                 .FirstOrDefault(candidate => candidate.ID.Equals(savedEquipment.ItemId, StringComparison.OrdinalIgnoreCase))
-                ?? throw new JsonSerializationException($"Equipped item '{savedEquipment.ItemId}' is missing from inventory.");
+                ?? ItemCreator.Create(savedEquipment.ItemId) as EquipmentItem
+                ?? throw new JsonSerializationException($"Equipped item '{savedEquipment.ItemId}' is not equipment.");
 
             if (item.EquipmentSlot != savedEquipment.Slot)
             {
                 throw new JsonSerializationException($"Item '{item.ID}' cannot use the saved equipment slot.");
             }
 
-            character.Equipment.Equip(item);
+            if (!character.Inventory.Contains(item))
+            {
+                character.Inventory.Add(item);
+            }
+
+            character.EquipItem(item);
         }
 
         foreach (string actionId in data.ActionIds)

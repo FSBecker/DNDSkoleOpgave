@@ -16,4 +16,13 @@ public sealed class EffectDefinition
 
     [JsonProperty("amount", Required = Required.Always)]
     public int Amount { get; set; }
+
+    [JsonProperty("target")]
+    public EffectTarget Target { get; set; } = EffectTarget.Enemy;
+
+    [JsonProperty("timing")]
+    public EffectTiming Timing { get; set; } = EffectTiming.Instant;
+
+    [JsonProperty("durationTurns")]
+    public int DurationTurns { get; set; } = 1;
 }

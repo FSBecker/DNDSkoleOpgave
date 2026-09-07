@@ -21,4 +21,7 @@ public sealed class GameDefinitions
 
     [JsonProperty("effects")]
     public List<EffectDefinition> Effects { get; set; } = [];
+
+    [JsonProperty("enemies")]
+    public List<EnemyDefinition> Enemies { get; set; } = [];
 }

@@ -11,13 +11,15 @@ public sealed class EquipmentSlots
 
     public void Clear() => _items.Clear();
 
-    public void Equip(EquipmentItem item)
+    internal EquipmentItem? Equip(EquipmentItem item)
     {
         ArgumentNullException.ThrowIfNull(item);
+        EquipmentItem? replacedItem = this[item.EquipmentSlot];
         _items[item.EquipmentSlot] = item;
+        return replacedItem;
     }
 
-    public EquipmentItem? Unequip(EquipmentSlot slot)
+    internal EquipmentItem? Unequip(EquipmentSlot slot)
     {
         if (!_items.Remove(slot, out EquipmentItem? item))
         {

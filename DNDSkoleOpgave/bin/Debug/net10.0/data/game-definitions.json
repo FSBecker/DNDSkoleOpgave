@@ -4,6 +4,7 @@
     {
       "name": "Barbarian",
       "description": "A strong close-combat fighter.",
+      "enemyOnly": false,
       "baseHealth": 12,
       "healthPerLevel": 7,
       "statBuffs": {
@@ -16,11 +17,13 @@
         "1": [
           "great-axe-swing"
         ]
-      }
+      },
+      "levelUnlocks": {}
     },
     {
       "name": "Ranger",
       "description": "A quick and resourceful wilderness fighter.",
+      "enemyOnly": false,
       "baseHealth": 8,
       "healthPerLevel": 5,
       "statBuffs": {
@@ -36,11 +39,13 @@
           "bow-shot",
           "short-sword-strike"
         ]
-      }
+      },
+      "levelUnlocks": {}
     },
     {
       "name": "Wizard",
       "description": "A spellcaster who uses intelligence.",
+      "enemyOnly": false,
       "baseHealth": 6,
       "healthPerLevel": 4,
       "statBuffs": {
@@ -58,13 +63,50 @@
           "weak-fireball",
           "witch-bolt"
         ]
+      },
+      "levelUnlocks": {}
+    },
+    {
+      "name": "EnemyAnimal",
+      "description": "-",
+      "enemyOnly": true,
+      "baseHealth": 10,
+      "healthPerLevel": 2,
+      "statBuffs": {},
+      "startingItemIds": [],
+      "levelLockedActionIds": {},
+      "levelUnlocks": {
+        "2": {
+          "healthBonus": 1,
+          "statBonuses": {},
+          "actionIds": [],
+          "itemIds": []
+        }
       }
+    },
+    {
+      "name": "GoblinWarrior",
+      "description": "-",
+      "enemyOnly": true,
+      "baseHealth": 7,
+      "healthPerLevel": 2,
+      "statBuffs": {
+        "Strength": 1,
+        "Dexterity": 2
+      },
+      "startingItemIds": [
+        "short-sword",
+        "wooden-shield"
+      ],
+      "levelLockedActionIds": {},
+      "levelUnlocks": {}
     }
   ],
   "races": [
     {
       "name": "Dwarf",
       "description": "A sturdy and powerful race.",
+      "enemyOnly": false,
       "statBuffs": {
         "Constitution": 2,
         "Strength": 1
@@ -73,6 +115,7 @@
     {
       "name": "Elf",
       "description": "A graceful race with keen intellect.",
+      "enemyOnly": false,
       "statBuffs": {
         "Dexterity": 2,
         "Intelligence": 1
@@ -81,6 +124,7 @@
     {
       "name": "Human",
       "description": "A versatile and adaptable race.",
+      "enemyOnly": false,
       "statBuffs": {
         "Strength": 1,
         "Dexterity": 1,
@@ -90,8 +134,29 @@
     {
       "name": "Half-Orc",
       "description": "Green, mean and lean",
+      "enemyOnly": false,
       "statBuffs": {
         "Strength": 3
+      }
+    },
+    {
+      "name": "HoundRace",
+      "description": "Enemy dogs",
+      "enemyOnly": true,
+      "statBuffs": {
+        "Strength": 1,
+        "Dexterity": 2,
+        "Intelligence": -2
+      }
+    },
+    {
+      "name": "Goblin",
+      "description": "-",
+      "enemyOnly": true,
+      "statBuffs": {
+        "Strength": 8,
+        "Dexterity": 14,
+        "Constitution": 10
       }
     }
   ],
@@ -201,6 +266,23 @@
       "equipmentSlot": "Helmet",
       "armorClass": 2,
       "actionIds": []
+    },
+    {
+      "id": "pRqGfBOFSC",
+      "name": "Schimitar",
+      "itemType": "Weapon",
+      "equipmentSlot": "MainWeapon",
+      "armorClass": 0,
+      "weaponType": "ShortSword",
+      "actionIds": [
+        "short-sword-strike"
+      ]
+    },
+    {
+      "id": "fyKgNKcwBB",
+      "name": "Healing Potion",
+      "itemType": "Consumable",
+      "actionIds": []
     }
   ],
   "actions": [
@@ -297,7 +379,33 @@
       "targetsAlly": false,
       "effects": [],
       "effectIds": []
+    },
+    {
+      "id": "N6xSZsQ77I",
+      "name": "Stab",
+      "kind": "attack",
+      "actionCost": 1,
+      "diceAmount": 1,
+      "diceSides": 4,
+      "primaryStat": "Dexterity",
+      "effects": [],
+      "effectIds": []
     }
   ],
-  "effects": []
+  "effects": [],
+  "enemies": [
+    {
+      "id": "E8TbuED8hc",
+      "name": "Weak hound",
+      "className": "EnemyAnimal",
+      "raceName": "HoundRace",
+      "level": 1,
+      "baseStats": [
+        10,
+        12,
+        10,
+        4
+      ]
+    }
+  ]
 }

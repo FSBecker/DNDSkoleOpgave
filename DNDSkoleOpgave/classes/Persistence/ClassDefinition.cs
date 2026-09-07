@@ -11,6 +11,9 @@ public sealed class ClassDefinition
     [JsonProperty("description", Required = Required.Always)]
     public string Description { get; set; } = string.Empty;
 
+    [JsonProperty("enemyOnly")]
+    public bool EnemyOnly { get; set; }
+
     [JsonProperty("baseHealth", Required = Required.Always)]
     public int BaseHealth { get; set; }
 
@@ -25,4 +28,7 @@ public sealed class ClassDefinition
 
     [JsonProperty("levelLockedActionIds", Required = Required.Always)]
     public Dictionary<int, List<string>> LevelLockedActionIds { get; set; } = [];
+
+    [JsonProperty("levelUnlocks")]
+    public Dictionary<int, LevelUnlockDefinition> LevelUnlocks { get; set; } = [];
 }

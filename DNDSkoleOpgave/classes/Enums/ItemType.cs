@@ -5,5 +5,7 @@ public enum ItemType
     Equipment,
     Weapon,
     Shield,
-    Consumable
+    Consumable,
+    Junk,
+    Valuable
 }

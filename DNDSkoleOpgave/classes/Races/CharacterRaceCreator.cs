@@ -15,4 +15,6 @@ public static class CharacterRaceCreator
             _ => throw new ArgumentException($"Unknown character race '{name}'.", nameof(name))
         };
     }
+
+    public static CharacterRace Create(Persistence.RaceDefinition definition) => new DefinedCharacterRace(definition);
 }

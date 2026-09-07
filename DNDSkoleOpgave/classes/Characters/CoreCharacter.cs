@@ -34,6 +34,12 @@ public abstract class CoreCharacter : IDamageable
 
         ApplyStatBuffs(CharacterClass.StatBuffs);
         ApplyStatBuffs(CharacterRace.StatBuffs);
+        foreach (LevelUnlock unlock in CharacterClass.LevelUnlocks
+                     .Where(entry => entry.Key <= Level)
+                     .Select(entry => entry.Value))
+        {
+            ApplyStatBuffs(unlock.StatBonuses);
+        }
         MaximumHealth = CalculateHealth();
         CurrentHealth = MaximumHealth;
     }
@@ -51,6 +57,7 @@ public abstract class CoreCharacter : IDamageable
     public List<CoreItem> Inventory { get; } = [];
     public EquipmentSlots Equipment { get; } = new();
     public List<CombatAction> Actions { get; } = [];
+    public List<ActiveEffect> ActiveEffects { get; } = [];
     public bool IsDefeated => CurrentHealth <= 0;
 
     public int CalculateArmorClass() =>
@@ -58,6 +65,7 @@ public abstract class CoreCharacter : IDamageable
 
     public int CalculateHealth() =>
         Math.Max(1, CharacterClass.BaseHealth + ((Level - 1) * CharacterClass.HealthPerLevel)
+            + CharacterClass.GetBonusHealthForLevel(Level)
             + GetStatModifier(CharacterStat.Constitution));
 
     public int CalculateDamage(CombatAction action)
@@ -70,6 +78,29 @@ public abstract class CoreCharacter : IDamageable
 
     public int GetStatModifier(CharacterStat stat) =>
         (int)Math.Floor((GetStat(stat) - 10) / 2.0);
+
+    public void EquipItem(EquipmentItem item)
+    {
+        ArgumentNullException.ThrowIfNull(item);
+        if (!Inventory.Remove(item))
+        {
+            throw new InvalidOperationException($"{item.Name} is not in {CharacterName}'s inventory.");
+        }
+
+        EquipmentItem? replacedItem = Equipment.Equip(item);
+        if (replacedItem is not null)
+        {
+            Inventory.Add(replacedItem);
+        }
+    }
+
+    public EquipmentItem UnequipItem(EquipmentSlot slot)
+    {
+        EquipmentItem item = Equipment.Unequip(slot)
+            ?? throw new InvalidOperationException($"Nothing is equipped in the {slot} slot.");
+        Inventory.Add(item);
+        return item;
+    }
 
     public void TakeDamage(int amount)
     {
@@ -97,9 +128,33 @@ public abstract class CoreCharacter : IDamageable
     public void LevelUp()
     {
         Level++;
-        UnlockActionsForCurrentLevel();
+        if (CharacterClass.LevelUnlocks.TryGetValue(Level, out LevelUnlock? unlock))
+        {
+            ApplyStatBuffs(unlock.StatBonuses);
+        }
+
+        ApplyLevelRewardsForCurrentLevel();
         MaximumHealth = CalculateHealth();
         CurrentHealth = MaximumHealth;
+    }
+
+    public void ApplyLevelRewardsForCurrentLevel()
+    {
+        UnlockActionsForCurrentLevel();
+        if (!CharacterClass.LevelUnlocks.TryGetValue(Level, out LevelUnlock? unlock))
+        {
+            return;
+        }
+
+        foreach (string itemId in unlock.ItemIds)
+        {
+            CoreItem item = ItemCreator.Create(itemId);
+            Inventory.Add(item);
+            if (item is EquipmentItem equipment && Equipment[equipment.EquipmentSlot] is null)
+            {
+                EquipItem(equipment);
+            }
+        }
     }
 
     public void UnlockActionsForCurrentLevel()
@@ -126,6 +181,18 @@ public abstract class CoreCharacter : IDamageable
         CurrentHealth = currentHealth;
         DeathRolls = deathRolls;
         ActionPoints = actionPoints;
+    }
+
+    public void AddActiveEffect(ActionEffect effect) => ActiveEffects.Add(new ActiveEffect(effect));
+
+    public void ProcessActiveEffects()
+    {
+        foreach (ActiveEffect effect in ActiveEffects)
+        {
+            effect.ProcessTurn(this);
+        }
+
+        ActiveEffects.RemoveAll(effect => effect.IsFinished);
     }
 
     private void ApplyStatBuffs(IReadOnlyDictionary<CharacterStat, int> buffs)

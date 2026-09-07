@@ -25,4 +25,7 @@ public sealed class ItemDefinition
 
     [JsonProperty("actionIds", Required = Required.Always)]
     public List<string> ActionIds { get; set; } = [];
+
+    [JsonProperty("effectIds")]
+    public List<string> EffectIds { get; set; } = [];
 }

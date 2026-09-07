@@ -38,7 +38,16 @@ public static class GameDefinitionsCreator
         StartingItemIds = [.. characterClass.StartingItemIds],
         LevelLockedActionIds = characterClass.LevelLockedActions.ToDictionary(
             entry => entry.Key,
-            entry => entry.Value.ToList())
+            entry => entry.Value.ToList()),
+        LevelUnlocks = characterClass.LevelUnlocks.ToDictionary(
+            entry => entry.Key,
+            entry => new LevelUnlockDefinition
+            {
+                HealthBonus = entry.Value.HealthBonus,
+                StatBonuses = new(entry.Value.StatBonuses),
+                ActionIds = [.. entry.Value.ActionIds],
+                ItemIds = [.. entry.Value.ItemIds]
+            })
     };
 
     private static RaceDefinition CreateRaceDefinition(CharacterRace race) => new()
@@ -60,7 +69,10 @@ public static class GameDefinitionsCreator
             EquipmentSlot = equipment?.EquipmentSlot,
             ArmorClass = equipment?.ArmorClass,
             WeaponType = weapon?.WeaponType,
-            ActionIds = weapon?.ActionIds.ToList() ?? []
+            ActionIds = weapon?.ActionIds.ToList() ?? [],
+            EffectIds = item is ConsumableItem consumable
+                ? consumable.Effects.Select(effect => $"{item.ID}-{effect.Type.ToString().ToLowerInvariant()}").ToList()
+                : []
         };
     }
 
@@ -90,7 +102,10 @@ public static class GameDefinitionsCreator
                 Id = $"{action.ID}-{effect.Type.ToString().ToLowerInvariant()}",
                 Name = effect.Type.ToString(),
                 Type = effect.Type,
-                Amount = effect.Amount
+                Amount = effect.Amount,
+                Target = effect.Target,
+                Timing = effect.Timing,
+                DurationTurns = effect.DurationTurns
             }).ToList()
         };
     }

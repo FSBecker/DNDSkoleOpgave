@@ -51,6 +51,10 @@ public sealed class CharacterSaveData
         int[] baseStats = [.. character.StatArray];
         RemoveBuffs(baseStats, character.CharacterClass.StatBuffs);
         RemoveBuffs(baseStats, character.CharacterRace.StatBuffs);
+        foreach (var unlock in character.CharacterClass.LevelUnlocks.Where(entry => entry.Key <= character.Level))
+        {
+            RemoveBuffs(baseStats, unlock.Value.StatBonuses);
+        }
 
         return new CharacterSaveData
         {
